@@ -9,78 +9,178 @@
 </head>
 <body>
 <tw-story><noscript><tw-noscript>JavaScript needs to be enabled to play 겜문학 2조 페이즈 2.</tw-noscript></noscript></tw-story>
-<tw-storydata name="겜문학 2조 페이즈 2" startnode="25" creator="Twine" creator-version="2.8.1" format="Harlowe" format-version="3.3.8" ifid="EBA6D3AA-7C62-4D45-B377-199B22DCED4F" options="" tags="" zoom="0.6" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css"></style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="PLA 일쓰" tags="" position="1075,3600" size="100,100">일반 쓰레기에 버리고 다시 붕어방으로 향한다.
+<tw-storydata name="겜문학 2조 페이즈 2" startnode="1" creator="Twine" creator-version="2.8.1" format="Harlowe" format-version="3.3.8" ifid="EBA6D3AA-7C62-4D45-B377-199B22DCED4F" options="" tags="" zoom="0.6" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css"></style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="2페이즈진입" tags="" position="800,225" size="100,100">몸이 가볍다. 오랜만에 좋은 꿈을 꾼 것 같다.
+
+
+[[다음으로|실험실프롤로그]]
+
+(set: $hasChem to false)
+&lt;!--화학 약품 - 폐기물 함에 버리러 다녀온다에서 줍게 된다. 줍게 되면 true로 바뀌고, 약품을 싱크대 - 폐액통에 버리면 false로 다시 변환--&gt;
+(set: $gotChem to false)
+&lt;!--화학 약품을 정리했다면 화학 약품 선택지를 숨기기 위한 변수. 줍는 순간 true로 바뀌고, 화학 약품 선택지가 책상에서 사라진다. 그리고 해당 변수가 true여야만 피크닉으로 진행할 수 있다. --&gt;
+(set: $goodToilet to true)
+(set: $goodChem to false)
+(set: $goodHepa to false)
+(set: $goodGlove to true)
+&lt;!--길몽을 꾸기 위한 변수. 모두 True여야만 좋은 꿈을 꿀 수 있다.--&gt;
+(set: $dirtyGlove to false)
+&lt;!--실험실 작업을 해서 장갑이 더러워진 경우 작업 선택지를 숨기기 위한 변수. true인 경우 책상에서 연구 중인 실험 진행으로 갈 수 없다.--&gt;
+(set: $exprPercentage to 0)
+&lt;!--연구 중인 실험 진행 진척도 변수. 100이 되면 연구를 완료해서, 해당 실험실 씬을 하지 않아도 되는 체크포인트 해금--&gt;
+(set: $iqValue to 1)
+&lt;!--실험 진행 진척도를 한번에 얼마나 올릴지에 대한 변수. 처음엔 1로 시작해, 게임의 선택지에서 도구들을 찾으면 조금씩 오른다.--&gt;
+(set: $doneToilet to false)
+(set: $hasClothes to false)
+(set: $hasPencil to false)
+&lt;!--실험 진행을 도와주는 도구를 획득했는지에 대한 변수. true로 설정되면 해당 선택지를 숨기는 용도 --&gt;
+
+&lt;!-- 피크닉파트--&gt;
+
+(set: $goodFood to false)
+(set: $goodCup to false)
+(set: $goodTable to true)
+&lt;!-- 악몽 여부를 담당하는 변수들.--&gt;
+(set: $isCupPla to false)
+(set: $isCupPlastic to false)
+(set: $isCupTumb to false)
+&lt;!--어떤 컵을 사용했는지 담당하는 변수들.--&gt;
+(set: $isFriendsDone to false)
+(set: $isDrinkDone to false)
+(set: $isTableDone to false)
+&lt;!-- 음식을 먹기 전 해결해야하는 일들. 해결하면 true로 전환.--&gt;
+(set: $hasNapkin to false)
+(set: $hasPoster to false)
+(set: $hasTumb to false)
+&lt;!-- 진행하며 수집할 수 있게 되는 아이템의 변수들. 주우면 true로 전환. --&gt;
+(set: $isEventDone to false)
+&lt;!-- 이벤트 중복참여 방지 변수--&gt;</tw-passagedata><tw-passagedata pid="2" name="PLA 일쓰" tags="" position="1075,3600" size="100,100">일반 쓰레기에 버리고 다시 붕어방으로 향한다.
+
 (set: $goodCup to true) &lt;!--goodCup true--&gt;
-[[돌아가기|붕어방]]</tw-passagedata><tw-passagedata pid="2" name="PLA 플라스틱" tags="" position="1200,3600" size="100,100">플라스틱 분리수거를 하고 다시 붕어방으로 향한다.
+[[돌아가기|붕어방]]</tw-passagedata><tw-passagedata pid="3" name="PLA 플라스틱" tags="" position="1200,3600" size="100,100">플라스틱 분리수거를 하고 다시 붕어방으로 향한다.
+
 (set: $goodCup to false) &lt;!--goodCup false--&gt;
-[[돌아가기|붕어방]]</tw-passagedata><tw-passagedata pid="3" name="PLA용 분리수거" tags="" position="1150,3475" size="100,100">(set: $isDrinkDone to true) &lt;!-- 선택지 진입시 isDrinkDone true--&gt;
-다산관 로비에 있는 쓰레기통 도착.
+[[돌아가기|붕어방]]</tw-passagedata><tw-passagedata pid="4" name="PLA용 분리수거" tags="" position="1150,3475" size="100,100">다산관 로비에 있는 쓰레기통 도착.
 
 어디에다 버려야하지?
+
+
 [[일반 쓰레기|PLA 일쓰]]
-[[플라스틱|PLA 플라스틱]]</tw-passagedata><tw-passagedata pid="4" name="Plastic 일쓰" tags="" position="1400,3600" size="100,100">일반 쓰레기에 버리고 다시 붕어방으로 향한다.
+[[플라스틱|PLA 플라스틱]]
+(set: $isDrinkDone to true) &lt;!-- 선택지 진입시 isDrinkDone true--&gt;</tw-passagedata><tw-passagedata pid="5" name="Plastic 일쓰" tags="" position="1400,3600" size="100,100">일반 쓰레기에 버리고 다시 붕어방으로 향한다.
+
 (set: $goodCup to false) &lt;!--goodCup false--&gt;
-[[돌아가기|붕어방]]</tw-passagedata><tw-passagedata pid="5" name="Plastic 플라스틱" tags="" position="1525,3600" size="100,100">플라스틱 분리수거를 하고 다시 붕어방으로 향한다.
+[[돌아가기|붕어방]]</tw-passagedata><tw-passagedata pid="6" name="Plastic 플라스틱" tags="" position="1525,3600" size="100,100">플라스틱 분리수거를 하고 다시 붕어방으로 향한다.
+
 (set: $goodCup to true) &lt;!--goodCup true--&gt;
-[[돌아가기|붕어방]]</tw-passagedata><tw-passagedata pid="6" name="Plastic용 분리수거" tags="" position="1400,3475" size="100,100">(set: $isDrinkDone to true) &lt;!-- 선택지 진입시 isDrinkDone true--&gt;
-다산관 로비에 있는 쓰레기통 도착.
+[[돌아가기|붕어방]]</tw-passagedata><tw-passagedata pid="7" name="Plastic용 분리수거" tags="" position="1400,3475" size="100,100">다산관 로비에 있는 쓰레기통 도착.
 
 어디에다 버려야하지?
+
+
 [[일반 쓰레기|Plastic 일쓰]]
-[[플라스틱|Plastic 플라스틱]]</tw-passagedata><tw-passagedata pid="7" name="게시판" tags="" position="975,3050" size="100,100">포스터 여럿 놓여있다. 어디 보자..
+[[플라스틱|Plastic 플라스틱]]
+(set: $isDrinkDone to true) &lt;!-- 선택지 진입시 isDrinkDone true--&gt;</tw-passagedata><tw-passagedata pid="8" name="게시판" tags="" position="950,2950" size="100,100">포스터 여럿 놓여있다. 어디 보자..
+
+&lt;img src =&#39;https://ifh.cc/g/bhAOwn.png&#39;&gt;
 
 &#39;&#39;총학생회에서 돗자리 대여해드립니다~&#39;&#39;
 
 &#39;&#39;PLA 생분해 플라스틱의 불편한 진실: PLA 플라스틱은 사실 생분해가 껄끄럽고 어려우며, 재활용이 불가능한 일반 쓰레기이다...&#39;&#39;
 (set: $hasPoster to true) &lt;!--hasPoster true--&gt;
-[[돌아가기|향학로]]</tw-passagedata><tw-passagedata pid="8" name="계속" tags="" position="300,1150" size="100,100">거의.. 도착했다..
+[[돌아가기|향학로]]</tw-passagedata><tw-passagedata pid="9" name="계속" tags="" position="300,1150" size="100,100">거의.. 도착했다..
+
+
 [[조금 더 가기]]
-[[돌아가기|싱크대]]</tw-passagedata><tw-passagedata pid="9" name="그릇을 수거하는 중국집" tags="" position="850,1950" size="100,100">메뉴 너무 열심히 골랐더니 목마르다... 배달 오기 전에 빨리 카페 가자.
+[[돌아가기|싱크대]]</tw-passagedata><tw-passagedata pid="10" name="그릇을 수거하는 중국집" tags="" position="850,1950" size="100,100">메뉴 너무 열심히 골랐더니 목마르다... 배달 오기 전에 빨리 카페 가자.
 (set: $goodFood to true) &lt;!--goodFood true--&gt;
-[[카페에 간다|카페]]</tw-passagedata><tw-passagedata pid="10" name="나처럼 급하게 들어온 사람을 위해 잘 접어 휴지 걸이에 올려놓는다." tags="" position="1450,900" size="100,100">휴지는 아껴 써야지.
+
+[[카페에 간다|카페]]</tw-passagedata><tw-passagedata pid="11" name="길몽" tags="" position="1675,3050" size="100,100">&lt;iframe id=&quot;bitsyone&quot; src=&quot;https://woduf1020.github.io/Dream
+_4&quot; style=&quot;border:none&quot; 
+height=512px width=512px&gt;&lt;/iframe&gt;
+&lt;style&gt;
+        .hidden-link {
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            animation: showLink 6s forwards;
+        }
+
+        @keyframes showLink {
+            0% {
+                opacity: 0;
+            }
+            83.33% { /* 5초 동안 숨김 상태 유지 */
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+&lt;/style&gt;
+&lt;a class=&quot;hidden-link&quot;&gt;[[엔딩으로]]&lt;/a&gt;</tw-passagedata><tw-passagedata pid="12" name="나처럼 급하게 들어온 사람을 위해 잘 접어 휴지 걸이에 올려놓는다." tags="" position="1450,900" size="100,100">휴지는 아껴 써야지.
+
 
 [[돌아가기|실험실]]
 (set: $goodToilet to true)
-&lt;!--goodToilet true--&gt;</tw-passagedata><tw-passagedata pid="11" name="내것도 아니고.. 찝찝하니 버린다" tags="" position="675,2925" size="100,100">친구들을 만났다. 붕어방으로 돌아가자.
-[[돌아간다|붕어방]]</tw-passagedata><tw-passagedata pid="12" name="돗자리" tags="" position="375,2800" size="100,100">나는 지금 돗자리가 없는데.. 어디서 구해오는게 좋을까?
+&lt;!--goodToilet true--&gt;</tw-passagedata><tw-passagedata pid="13" name="내것도 아니고.. 찝찝하니 버린다" tags="" position="675,2925" size="100,100">친구들을 만났다. 붕어방으로 돌아가자.
 
-[[바로 앞 편의점에서 일회용 돗자리를 사온다]]
-[[총학생회에서 돗자리를 빌려온다]] (if: $hasPoster is true) &lt;!--해당 선택지는 hasPoster true인 경우에만 등장.--&gt;
-[[돌아간다|붕어방]]</tw-passagedata><tw-passagedata pid="13" name="물티슈로 닦는다" tags="" position="300,3325" size="100,100">물티슈로 닦았다.
+
+[[돌아간다|붕어방]]</tw-passagedata><tw-passagedata pid="14" name="돗자리" tags="" position="375,2800" size="100,100">나는 지금 돗자리가 없는데.. 어디서 구해오는게 좋을까?
+
+
+[[바로 앞 편의점에서 일회용 돗자리를 사온다]](if: $hasPoster is true)
+[[총학생회에서 돗자리를 빌려온다]] &lt;!--해당 선택지는 hasPoster true인 경우에만 등장.--&gt;
+[[돌아간다|붕어방]]</tw-passagedata><tw-passagedata pid="15" name="물티슈로 닦는다" tags="" position="300,3325" size="100,100">물티슈로 닦았다.
+
+
+[[돌아가기|붕어방]]
 (set: $goodTable to false) &lt;!--goodTable false--&gt;
-[[돌아가기|붕어방]]</tw-passagedata><tw-passagedata pid="14" name="바로 앞 편의점에서 일회용 돗자리를 사온다" tags="" position="450,3000" size="100,100">오늘 많이 움직였는데.. 그냥 하나 사야겠다
+(set: $isTableDone to true)</tw-passagedata><tw-passagedata pid="16" name="바로 앞 편의점에서 일회용 돗자리를 사온다" tags="" position="475,3000" size="100,100">오늘 많이 움직였는데.. 그냥 하나 사야겠다
 편하고 좋지 뭐.
+
+
+[[돌아가기|붕어방]]
 (set: $goodTable to false) &lt;!--goodTable false--&gt;
-[[돌아가기|붕어방]]</tw-passagedata><tw-passagedata pid="15" name="배달앱" tags="" position="800,1825" size="100,100">친구: 어디서 시킬래?
+(set: $isTableDone to true)</tw-passagedata><tw-passagedata pid="17" name="배달앱" tags="" position="800,1825" size="100,100">친구: 어디서 시킬래?
+
+
 [[&lt;여왕짜장&gt; 군만두 리뷰 이벤트 중! 일쓰에 버리기만 하면 되는 NO회수 용기 사용! (리뷰 999+)|일회용품을 사용하는 중국집]]
-[[&lt;중중국집&gt; 짜장면이 맛있는 집. 일회용품 사용하지 않는 친환경 업소입니다..(리뷰 34)|그릇을 수거하는 중국집]]</tw-passagedata><tw-passagedata pid="16" name="볼일 보기" tags="" position="1450,775" size="100,100">볼 일을 보았다. 기분이 상쾌해 실험도 집중해서 할 수 있을 것 같은 기분이 든다.
+[[&lt;중중국집&gt; 짜장면이 맛있는 집. 일회용품 사용하지 않는 친환경 업소입니다..(리뷰 34)|그릇을 수거하는 중국집]]</tw-passagedata><tw-passagedata pid="18" name="볼일 보기" tags="" position="1450,775" size="100,100">볼 일을 보았다. 기분이 상쾌해 실험도 집중해서 할 수 있을 것 같은 기분이 든다.
 
 아까 챙긴 휴지가 남았다. 남은 휴지를 어떻게 처리하지?
+
 
 [[나처럼 급하게 들어온 사람을 위해 잘 접어 휴지 걸이에 올려놓는다.]]
 [[청소 아주머니에게 한 소리 들을 것 같다. 변기에 넣고 물을 내린다.]]
 (set: $doneToilet to true)
 (set: $iqValue to $iqValue+4)
 &lt;!--doneToilet true--&gt;
-&lt;!--iqValue += 4--&gt;</tw-passagedata><tw-passagedata pid="17" name="분리수거장으로" tags="" position="1225,2925" size="100,100">향학로가 시끌벅적하네. 무슨 행사 하고있나...
+&lt;!--iqValue += 4--&gt;</tw-passagedata><tw-passagedata pid="19" name="분리수거장으로" tags="" position="1250,2925" size="100,100">향학로가 시끌벅적하네. 무슨 행사 하고있나...
 궁금한데 한 번 가볼까?
 
-[[향학로 잠깐 들린다|향학로]] (if: $isCupPla is true)  &lt;!--해당 선택지는 isCupPla true인 경우에만 등장.--&gt;
-[[바로 다산관 로비로 간다|PLA용 분리수거]] (if: $isCupPlastic is true) &lt;!--해당 선택지는 isCupPlastic true인 경우에만 등장.--&gt;
+[[향학로 잠깐 들린다|향학로]]  &lt;!--해당 선택지는 isCupPla true인 경우에만 등장.--&gt; (if: $isCupPla is true)
+[[바로 다산관 로비로 간다|PLA용 분리수거]] &lt;!--해당 선택지는 isCupPlastic true인 경우에만 등장.--&gt;(if: $isCupPlastic is true) 
 [[바로 다산관 로비로 간다|Plastic용 분리수거]]
-[[돌아가기|음료수 치우기]]</tw-passagedata><tw-passagedata pid="18" name="붕어방" tags="" position="825,2650" size="100,100">붕어방에 도착했다. 짜장면이 도착하기까지 얼마 남지 않은 시간.... 해야할 일이 남았다
+[[돌아가기|음료수 치우기]]</tw-passagedata><tw-passagedata pid="20" name="붕어방" tags="" position="825,2650" size="100,100">붕어방에 도착했다. 짜장면이 도착하기까지 얼마 남지 않은 시간.... 해야할 일이 남았다
 돗자리는 미리 깔아두면 날아갈 수도 있으니까 최대한 나중에 까는게 좋을 것 같기도..
-[[근처에 있는 다른 친구들 붕어방으로 데려오기|친구들 데려오기]] (if: $isFriendDone is false) &lt;!--해당 선택지는 isFriendsDone false인 경우에만 나옴--&gt;
-[[다 마신 음료 치우기|음료수 치우기]] (if: $isDrinkDone is false) &lt;!--해당 선택지는 isDrinkDone false인 경우에만 나옴--&gt;
-[[돗자리 깔아 먹을 준비하기|돗자리]] (if: $isTableDone is false) &lt;!--해당 선택지는 isTableDone false인 경우에만 나옴--&gt;
-[[짜장면 먹기|음식 먹기]]</tw-passagedata><tw-passagedata pid="19" name="새로운 장갑을 꺼낸다" tags="" position="975,775" size="100,100">세척하러 가는건 번거로워서 새로운 장갑을 꺼냈다.
+
+&lt;img src = &#39;https://ifh.cc/g/Or3Zsn.png&#39;&gt;
+(if: $isFriendsDone is false)
+[[근처에 있는 다른 친구들 붕어방으로 데려오기|친구들 데려오기]] &lt;!--해당 선택지는 isFriendsDone false인 경우에만 나옴--&gt;(if: $isDrinkDone is false)
+[[다 마신 음료 치우기|음료수 치우기]]  &lt;!--해당 선택지는 isDrinkDone false인 경우에만 나옴--&gt; (if: $isTableDone is false)
+[[돗자리 깔아 먹을 준비하기|돗자리]] &lt;!--해당 선택지는 isTableDone false인 경우에만 나옴--&gt;
+[[짜장면 먹기|음식 먹기]]</tw-passagedata><tw-passagedata pid="21" name="새로운 장갑을 꺼낸다" tags="" position="975,775" size="100,100">세척하러 가는건 번거로워서 새로운 장갑을 꺼냈다.
+
 
 [[돌아간다|책상]]
 (set: $goodGlove to false)
 (set: $dirtyGlove to false)
 &lt;!--goodGlove false--&gt;
-&lt;!--dirtyGlove false--&gt;</tw-passagedata><tw-passagedata pid="20" name="손수건으로 닦는다" tags="" position="450,3325" size="100,100">아까 보관해놓은 손수건! 지금 써야겠다. 
-[[돌아가기|붕어방]]</tw-passagedata><tw-passagedata pid="21" name="스토리" tags="" position="1975,2125" size="100,100">해당 passage는 후에 기획 업무에서 참고용으로 남겨놓은 passage입니다. 읽어보셔도는 되지만 코딩 및 스토리 파트분들은 아래 내용 때문에 헷갈리지는 마세요!
+&lt;!--dirtyGlove false--&gt;</tw-passagedata><tw-passagedata pid="22" name="손수건으로 닦는다" tags="" position="450,3325" size="100,100">아까 보관해놓은 손수건! 지금 써야겠다. 
+
+
+[[돌아가기|붕어방]]
+(set: $goodTable to true)
+(set: $isTableDone to true)</tw-passagedata><tw-passagedata pid="23" name="스토리" tags="" position="1975,2125" size="100,100">해당 passage는 후에 기획 업무에서 참고용으로 남겨놓은 passage입니다. 읽어보셔도는 되지만 코딩 및 스토리 파트분들은 아래 내용 때문에 헷갈리지는 마세요!
 
 
 잠 잘 수 있는 조건
@@ -133,7 +233,7 @@
 -길몽 or 악몽
 
 
-생각해봤는데 게임 다 끝나고 다시 병원으로 돌아가고 이런저런 말 하다가 마지막에 저희 게임에 숨겨져있던 환경 문제에 대한 정답을 한 번 싹 언급해주는 정보 전달 느낌으로 한 페이지 있어도 좋을 거 같아요</tw-passagedata><tw-passagedata pid="22" name="스토리용 참고 페이지" tags="" position="900,200" size="100,100">기본적으로 선택지 명칭을 포함한 모든 텍스트는 교체 하셔도 될 것 같습니다. 더 자연스러운 텍스트가 있다면 구조를 건드리지 않는 선에서 해당 방법으로 이야기의 흐름이 자연스러워지도록 수정해주세요.
+생각해봤는데 게임 다 끝나고 다시 병원으로 돌아가고 이런저런 말 하다가 마지막에 저희 게임에 숨겨져있던 환경 문제에 대한 정답을 한 번 싹 언급해주는 정보 전달 느낌으로 한 페이지 있어도 좋을 거 같아요</tw-passagedata><tw-passagedata pid="24" name="스토리용 참고 페이지" tags="" position="875,75" size="100,100">기본적으로 선택지 명칭을 포함한 모든 텍스트는 교체 하셔도 될 것 같습니다. 더 자연스러운 텍스트가 있다면 구조를 건드리지 않는 선에서 해당 방법으로 이야기의 흐름이 자연스러워지도록 수정해주세요.
 
 단 코딩이 완료되기 전까진 &lt;!--Comment Text--&gt;내의 텍스트는 건드리지 말아주세요!
 
@@ -141,24 +241,92 @@
 ex) 실험실 선택지 칠판에 화학 약품 정리법이 나와있다던가. 
 
 해파 필터까지는 친구가 말하는 방법으로 보여주면 될 것 같은데, 장갑의 내용은 어디에 넣어야 할지 애매하네요. 현재 존재하는 선택지에 넣을 곳이 마땅찮다면 구조에 큰 영향이 가지 않는 선에서 새로운 선택지를 추가하셔도 됩니다. 
-ex) 책상과 새로운 장갑을 꺼낸다 사이에 새로운 설명 선택지 추가 등</tw-passagedata><tw-passagedata pid="23" name="실험복" tags="" position="700,650" size="100,100">안전 수칙 옆에 실험복이 놓여있었다.
+ex) 책상과 새로운 장갑을 꺼낸다 사이에 새로운 설명 선택지 추가 등</tw-passagedata><tw-passagedata pid="25" name="실험복" tags="" position="700,650" size="100,100">안전 수칙 옆에 실험복이 놓여있었다.
 더 수월하게 진행할 수 있을 것 같다.
+
+
 [[돌아가기|실험실]]
 &lt;!--hasClothes true--&gt;
 &lt;!--iqValue +=5--&gt;
 (set: $hasClothes to true)
-(set: $iqValue to $iqValue+5)</tw-passagedata><tw-passagedata pid="24" name="실험실" tags="" position="800,525" size="100,100">평범한 학부 실험 수업용 실험실이다.
+(set: $iqValue to $iqValue+5)</tw-passagedata><tw-passagedata pid="26" name="실험실" tags="" position="800,525" size="100,100">평범한 학부 실험 수업용 실험실이다.
 벽면에는 실험실 안전 수칙과 폐기물 폐기법이 적혀있다.
 
 - 실험실 안전 수칙: 실험실 내부에서는 안전 장구를 착용하고.. (if: $hasClothes is false)
 [[실험복]]&lt;!--이 선택지는 hasClothes true면 출력되지 않음--&gt;
 - 폐기물 폐기법: 폐기물은 각 폐기물 분류에 맞게 폐기..
 
+&lt;img src = &#39;https://ifh.cc/g/WDwrRH.png&#39;&gt;
+
 [[책상]](if:$doneToilet is false)
 [[화장실]]&lt;!--이 선택지는 doneToilet true면 출력되지 않음--&gt;
 [[싱크대]](if: $goodHepa is false)
 [[후드]]&lt;!--이 선택지는 goodHepa true면 출력되지 않음--&gt;(if: $gotChem is true)
-[[피크닉가기]]&lt;!--이 선택지는 gotChem false면 출력되지 않음--&gt;</tw-passagedata><tw-passagedata pid="25" name="실험실 프롤로그" tags="" position="800,400" size="100,100">오늘은 실험 수업날이다.
+[[피크닉가기]]&lt;!--이 선택지는 gotChem false면 출력되지 않음--&gt;</tw-passagedata><tw-passagedata pid="27" name="실험실로 가는 경우" tags="" position="1600,400" size="100,100">.....
+
+....... 
+
+어? 내가 여기서 뭐 하고 있지?
+기묘한 꿈을 꾼 것 같기도 하고...
+학교 ...? 아 오늘 실험 있었지 참. 친구가 기다리겠다. 멍때리고 있을게 아니라 얼른 가야지.
+
+
+[[실험실프롤로그]]
+
+&lt;!--여기서 경고 사항 제외한 나머지 변수들을 초기화 해주세요.--&gt;
+(set: $hasChem to false)
+&lt;!--화학 약품 - 폐기물 함에 버리러 다녀온다에서 줍게 된다. 줍게 되면 true로 바뀌고, 약품을 싱크대 - 폐액통에 버리면 false로 다시 변환--&gt;
+(set: $gotChem to false)
+&lt;!--화학 약품을 정리했다면 화학 약품 선택지를 숨기기 위한 변수. 줍는 순간 true로 바뀌고, 화학 약품 선택지가 책상에서 사라진다. 그리고 해당 변수가 true여야만 피크닉으로 진행할 수 있다. --&gt;
+(set: $goodToilet to true)
+(set: $goodChem to false)
+(set: $goodHepa to false)
+(set: $goodGlove to true)
+&lt;!--길몽을 꾸기 위한 변수. 모두 True여야만 좋은 꿈을 꿀 수 있다.--&gt;
+(set: $dirtyGlove to false)
+&lt;!--실험실 작업을 해서 장갑이 더러워진 경우 작업 선택지를 숨기기 위한 변수. true인 경우 책상에서 연구 중인 실험 진행으로 갈 수 없다.--&gt;
+(set: $doneToilet to false)
+
+
+&lt;!-- 피크닉파트--&gt;
+
+(set: $goodFood to false)
+(set: $goodCup to false)
+(set: $goodTable to true)
+&lt;!-- 악몽 여부를 담당하는 변수들.--&gt;
+(set: $isCupPla to false)
+(set: $isCupPlastic to false)
+(set: $isCupTumb to false)
+&lt;!--어떤 컵을 사용했는지 담당하는 변수들.--&gt;
+(set: $isFriendsDone to false)
+(set: $isDrinkDone to false)
+(set: $isTableDone to false)
+&lt;!-- 음식을 먹기 전 해결해야하는 일들. 해결하면 true로 전환.--&gt;
+(set: $hasNapkin to false)
+&lt;!-- 진행하며 수집할 수 있게 되는 아이템의 변수들. 포스터는 한번 보면 그대로 유지 주우면 true로 전환. --&gt;
+(set: $isEventDone to false)
+&lt;!-- 이벤트 중복참여 방지 변수--&gt;</tw-passagedata><tw-passagedata pid="28" name="실험실으로" tags="" position="1675,1600" size="100,100">&lt;iframe id=&quot;bitsyone&quot; src=&quot;https://woduf1020.github.io/Dream
+_3&quot; style=&quot;border:none&quot; 
+height=512px width=512px&gt;&lt;/iframe&gt;&lt;style&gt;
+        .hidden-link {
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            animation: showLink 11s forwards;
+        }
+
+        @keyframes showLink {
+            0% {
+                opacity: 0;
+            }
+            83.33% { /* 5초 동안 숨김 상태 유지 */
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+&lt;/style&gt;
+&lt;a class=&quot;hidden-link&quot;&gt;[[잠에서 깨어난다.|실험실로 가는 경우]]&lt;/a&gt;</tw-passagedata><tw-passagedata pid="29" name="실험실프롤로그" tags="" position="800,375" size="100,100">오늘은 실험 수업날이다.
 
 아침부터 학교를 가려니 기분이 영 별로다. 잠도 제대로 못자기도 했고…
 
@@ -171,130 +339,170 @@ ex) 책상과 새로운 장갑을 꺼낸다 사이에 새로운 설명 선택지
 친구: 그래 그러자!
 
 
-[[실험실]]
-
-(set: $hasChem to false)
-&lt;!--화학 약품 - 폐기물 함에 버리러 다녀온다에서 줍게 된다. 줍게 되면 true로 바뀌고, 약품을 싱크대 - 폐액통에 버리면 false로 다시 변환--&gt;
-(set: $gotChem to false)
-&lt;!--화학 약품을 정리했다면 화학 약품 선택지를 숨기기 위한 변수. 줍는 순간 true로 바뀌고, 화학 약품 선택지가 책상에서 사라진다. 그리고 해당 변수가 true여야만 피크닉으로 진행할 수 있다. --&gt;
-(set: $goodToilet to true)
-(set: $goodChem to false)
-(set: $goodHepa to false)
-(set: $goodGlove to true)
-&lt;!--길몽을 꾸기 위한 변수. 모두 True여야만 좋은 꿈을 꿀 수 있다.--&gt;
-(set: $dirtyGlove to false)
-&lt;!--실험실 작업을 해서 장갑이 더러워진 경우 작업 선택지를 숨기기 위한 변수. true인 경우 책상에서 연구 중인 실험 진행으로 갈 수 없다.--&gt;
-(set: $exprPercentage to 0)
-&lt;!--연구 중인 실험 진행 진척도 변수. 100이 되면 연구를 완료해서, 해당 실험실 씬을 하지 않아도 되는 체크포인트 해금--&gt;
-(set: $iqValue to 1)
-&lt;!--실험 진행 진척도를 한번에 얼마나 올릴지에 대한 변수. 처음엔 1로 시작해, 게임의 선택지에서 도구들을 찾으면 조금씩 오른다.--&gt;
-(set: $doneToilet to false)
-(set: $hasClothes to false)
-(set: $hasPencil to false)
-&lt;!--실험 진행을 도와주는 도구를 획득했는지에 대한 변수. true로 설정되면 해당 선택지를 숨기는 용도 --&gt;</tw-passagedata><tw-passagedata pid="26" name="실험실로 가는 경우" tags="" position="1600,400" size="100,100">.....
-
-....... 
-
-어? 내가 여기서 뭐 하고 있지?
-기묘한 꿈을 꾼 것 같기도 하고...
-학교 ...? 아 오늘 실험 있었지 참. 친구가 기다리겠다. 멍때리고 있을게 아니라 얼른 가야지.
-[[실험실 프롤로그]]
-
-&lt;!--여기서 경고 사항 제외한 나머지 변수들을 초기화 해주세요.--&gt;</tw-passagedata><tw-passagedata pid="27" name="싱크대" tags="" position="300,650" size="100,100">싱크대 약품을 버리는 곳.
+[[실험실]]</tw-passagedata><tw-passagedata pid="30" name="싱크대" tags="" position="300,650" size="100,100">싱크대 약품을 버리는 곳.
 장갑도 씻을 수 있다.
+
+
 (if: $hasChem is true)
 [[폐액통]]&lt;!--이 선택지는 hasChem false면 출력되지 않음--&gt;(if: $dirtyGlove is true)
 [[장갑을 씻는다]]&lt;!--이 선택지는 dirtyGlove false면 출력되지 않음--&gt;
-[[돌아간다|실험실]]</tw-passagedata><tw-passagedata pid="28" name="어딘가 쓸 곳이 있겠지, 챙겨둔다." tags="" position="825,2925" size="100,100">친구들을 만났다. 붕어방으로 돌아가자.
-(set: $hasNapkin to true) &lt;!--hasNapkin true--&gt;
-[[돌아간다|붕어방]]</tw-passagedata><tw-passagedata pid="29" name="엔딩으로" tags="" position="1800,3050" size="100,100"></tw-passagedata><tw-passagedata pid="30" name="오늘의 실험 진행" tags="" position="1100,775" size="100,100">(set: $exprPercentage to $exprPercentage+$iqValue)&lt;!--이 선택지를 들어오자마자 exprPercentage+= iqValue를 실행한다.--&gt;
+[[돌아간다|실험실]]</tw-passagedata><tw-passagedata pid="31" name="어딘가 쓸 곳이 있겠지, 챙겨둔다." tags="" position="825,2925" size="100,100">친구들을 만났다. 붕어방으로 돌아가자.
+
+
+[[돌아간다|붕어방]]
+(set: $hasNapkin to true) &lt;!--hasNapkin true--&gt;</tw-passagedata><tw-passagedata pid="32" name="엔딩으로" tags="" position="1825,3150" size="100,100">&#39;&#39;Epilogue&#39;&#39;
+
+의사: 네 xxx씨 들어오세요. 그간 잘 지내셨나요? 약은 빼놓지 않고 잘 드시죠?
+나: 안녕하세요 선생님. 사실 약을 깜빡하고 못 먹을 때가 저번보단 많긴 했는데, 신기하게도 약을 꼬
+박꼬박 먹을 때보다 일상 생활할 때 덜 졸리고 악몽도 덜 꾸게 되는 것 같아요.
+의사: 흠… 약이라는게 증상을 없애는 게 아닌 완화하는 맥락에서 사용하는 거라, 증상이 없으면 사실
+효과라 할 게 없는 거나 마찬가지이긴 하죠. 요새 컨디션을 0점부터 10점사이로 점수를 매긴다면 어
+느 정도인 것 같습니까?
+나: 워낙 계속 컨디션이 안 좋다가 요새는 또 좋아져서 8점이라 할 수 있을 것 같아요. 최근 들어 가장
+좋은 것 같아요.
+의사: 그렇군요. 확실한 이유는 알 수 없지만 증상이 많이 개선된 부분이 보이니 약을 차츰 줄여가며
+관리해봅시다. 우선은 증상이 너무 졸릴때만 드시라고 약을 처방해드릴 테니 심할 때만 드셔보시고
+생활해보는 거로 하죠. 다음 진료 때 또 봅시다.
+
+
+
+&lt;img src =&#39;https://ifh.cc/g/Hj5lSF.jpg&#39;&gt;
+
+….
+
+
+
+마지막 진료 이후로 난 더 이상 약을 먹지 않는다. 병원을 가지도 않는다.
+더 이상 졸리지 않다. 더 이상 무서운 꿈을 꾸지도 않는다.
+그때의 나와 지금의 나, 이 사이에 무엇이 달라졌길래….
+무엇이 달라진 지는 모르겠지만, 그래도 지금의 나를 잃고 싶지 않아!
+
+
+….
+
+
+The EcoNightmare
+
+Credit
+연출: 박서현, 이은혁
+스토리: 성진우, 심수연
+코딩: 전재열, 김동곤
+아트: 신주영
+2024-1 게임과 인문학 팀 프로젝트
+
+플레이 해주셔서 감사합니다!</tw-passagedata><tw-passagedata pid="33" name="오늘의 실험 진행" tags="" position="1100,775" size="100,100">(set: $exprPercentage to $exprPercentage+$iqValue)&lt;!--이 선택지를 들어오자마자 exprPercentage+= iqValue를 실행한다.--&gt;
 실험을 진행했다.
 현재 실험 진척도는 $exprPercentage%이다.
-실험을 진행하여 장갑이 더러워졌다.(if:$exprPercentage &gt;99)
+실험을 진행하여 장갑이 더러워졌다.
+(if:$exprPercentage &gt;99)
 [실험이 완료됐다! 이제 실험실은 돌아오지 않아도 되겠는걸?]&lt;!--이 텍스트는 exprPercentage&gt;=100 인 경우 출력된다.--&gt;
-
 [[돌아가기|책상]]
 (set: $dirtyGlove to true)
-&lt;!--dirtyGlove true--&gt;</tw-passagedata><tw-passagedata pid="31" name="오답" tags="" position="775,3400" size="100,100">땡.
-[[아.|향학로]]</tw-passagedata><tw-passagedata pid="32" name="음료수 치우기" tags="" position="1225,2800" size="100,100">음료 후딱 버리고 와야겠다.
+&lt;!--dirtyGlove true--&gt;</tw-passagedata><tw-passagedata pid="34" name="오답" tags="" position="775,3400" size="100,100">땡.
+
+
+[[아.|향학로]]</tw-passagedata><tw-passagedata pid="35" name="음료수 치우기" tags="" position="1225,2800" size="100,100">음료 후딱 버리고 와야겠다.
 (if: $isCupTumb is true) &lt;!--해당 선택지는 isCupTumb true인 경우에만 띄움.--&gt;
-[[아, 맞다. 나 텀블러에 받았었네. 귀찮게 버리고 올 일 없어졌다!|텀블러 변수용 passage]] (if: $isCupTumb is false) &lt;!--해당 선택지는 isCupTumb false인 경우에만 띄움.--&gt;
-[[다산관 로비로 가서 버려야겠다|분리수거장으로]]
-[[돌아가기|붕어방]]</tw-passagedata><tw-passagedata pid="33" name="음식 먹기" tags="" position="1575,2800" size="100,100">(if: $isDrinkDone is false) &lt;!--해당 텍스트는 isDrinkDone false인 경우에만 등장 --&gt;
-음료수 쓰레기를 안버렸다.(if: $isFriendsDone is false)  &lt;!--해당 텍스트는 isFriendsDone false인 경우에만 등장 --&gt;
-친구들을 안 데려왔다. (if: $isTableDone is false) &lt;!--해당 텍스트는 isTableDone false인 경우에만 등장 --&gt;
-돗자리를 준비하지 않았다.
-(if: $isDrinkDone is true and $isFriendsDone is true and $isTableDone is true) and (if: $goodFood is false or $goodCup is false or $goodTable is false) &lt;!--해당 선택지는 위 세 변수가 true이며, good 변수중 하나라도 false인 경우 등장--&gt;
-[[음식이 도착했다!|피크닉 악몽]] (if: $isDrinkDone is true and $isFriendsDone is true and $isTableDone is true and $goodFood is true and $goodCup is true and $goodTable is true) &lt;!--해당 선택지는 위 세 변수가 true이며, good 변수가 모두 true인 경우 등장--&gt;
+[[아, 맞다. 나 텀블러에 받았었네. 귀찮게 버리고 올 일 없어졌다!|텀블러 변수용 passage]]
+[[다산관 로비로 가기|분리수거장으로]]
+[[돌아가기|붕어방]]</tw-passagedata><tw-passagedata pid="36" name="음식 먹기" tags="" position="1575,2800" size="100,100">(if: $isDrinkDone is false) &lt;!--해당 텍스트는 isDrinkDone false인 경우에만 등장 --&gt;
+[음료수 쓰레기를 안버렸다.]
+(if: $isFriendsDone is false)  &lt;!--해당 텍스트는 isFriendsDone false인 경우에만 등장 --&gt;
+[친구들을 안 데려왔다.]
+(if: $isTableDone is false) &lt;!--해당 텍스트는 isTableDone false인 경우에만 등장 --&gt;
+[돗자리를 준비하지 않았다.]
+(if: $isDrinkDone is true and $isFriendsDone is true and $isTableDone is true and ($goodFood is false or $goodCup is false or $goodTable is false or $goodToilet is false or $goodChem is false or $goodHepa is false or $goodGlove is false)) &lt;!--해당 선택지는 위 세 변수가 true이며, good 변수중 하나라도 false인 경우 등장--&gt;
+[[음식이 도착했다!|피크닉 악몽]] (if: $isDrinkDone is true and $isFriendsDone is true and $isTableDone is true and $goodFood is true and $goodCup is true and $goodTable is true and $goodToilet is true and $goodChem is true and $goodHepa is true and $goodGlove is true) &lt;!--해당 선택지는 위 세 변수가 true이며, good 변수가 모두 true인 경우 등장--&gt;
 [[음식이 도착했다!|피크닉 길몽]]
-[[아직 밥먹을 준비가 안됐어|붕어방]]</tw-passagedata><tw-passagedata pid="34" name="이 정도 양이면 그냥 이 폐액통에 버릴 수 있을 것 같다" tags="" position="425,900" size="100,100">조심스럽게 넣으면 다 들어갈 것 같다.
+[[아직 밥먹을 준비가 안됐어|붕어방]]</tw-passagedata><tw-passagedata pid="37" name="이 정도 양이면 그냥 이 폐액통에 버릴 수 있을 것 같다" tags="" position="425,900" size="100,100">조심스럽게 넣으면 다 들어갈 것 같다.
 
 ..
 
 이런! 폐액통이 넘쳐 폐액이 싱크대로 흘러버렸다. 그래도 버렸으니까.. 조금은 괜찮겠지?
 
+
 [[돌아가기|싱크대]]
 (set: $goodChem to false)
 (set: $hasChem to false)
 &lt;!--goodChem false--&gt;
-&lt;!--hasChem false--&gt;</tw-passagedata><tw-passagedata pid="35" name="이벤트" tags="" position="975,3250" size="100,100">(set: $isEventDone to true) &lt;!--해당 선택지 진입시 isEventDone true--&gt;
+&lt;!--hasChem false--&gt;</tw-passagedata><tw-passagedata pid="38" name="이벤트" tags="" position="975,3250" size="100,100">(set: $isEventDone to true) &lt;!--해당 선택지 진입시 isEventDone true--&gt;
 퀴즈를 맞추면 텀블러를 주는 이벤트를 하고 있다.
 
 이벤트 진행자: 풀아웃 1에서 주인공이 찾아야하는 것은?!
 
 갑자기 퀴즈를 내서 당황스럽지만.... 답이 뭐더라?
+
+
 [[워터칩|정답]]
 [[자신에게 총을 쏜 사람에 대한 복수|오답]]
 [[악당에게 빼앗긴 자신의 아들|오답]]
 [[식량|오답]]
-[[폴아웃엔 목표 같은 건 없습니다. 유저가 선택하는 모든 길이 주인공의 임무입니다.|진지 오답]]</tw-passagedata><tw-passagedata pid="36" name="일회용 플라스틱 컵" tags="" position="825,2525" size="100,100">카페 직원: 감사합니다 좋은하루 되세요~
+[[폴아웃엔 목표 같은 건 없습니다. 유저가 선택하는 모든 길이 주인공의 임무입니다.|진지 오답]]</tw-passagedata><tw-passagedata pid="39" name="일회용 플라스틱 컵" tags="" position="825,2525" size="100,100">카페 직원: 감사합니다 좋은하루 되세요~
 (set: $isCupPlastic to true) &lt;!--isCupPlastic true--&gt;
-[[붕어방으로 간다|붕어방]]</tw-passagedata><tw-passagedata pid="37" name="일회용품을 사용하는 중국집" tags="" position="725,1950" size="100,100">메뉴 너무 열심히 골랐더니 목마르다... 배달 오기 전에 빨리 카페 가자.
+
+[[붕어방으로 간다|붕어방]]</tw-passagedata><tw-passagedata pid="40" name="일회용품을 사용하는 중국집" tags="" position="725,1950" size="100,100">메뉴 너무 열심히 골랐더니 목마르다... 배달 오기 전에 빨리 카페 가자.
 (set: $godFood to false) &lt;!--goodFood false--&gt;
-[[카페에 간다|카페]]</tw-passagedata><tw-passagedata pid="38" name="장갑을 씻는다" tags="" position="175,775" size="100,100">장갑을 씻었다. 계속 이 장갑을 쓸 수 있겠어!
+
+[[카페에 간다|카페]]</tw-passagedata><tw-passagedata pid="41" name="장갑을 씻는다" tags="" position="175,775" size="100,100">장갑을 씻었다. 계속 이 장갑을 쓸 수 있겠어!
+
 
 [[돌아간다|싱크대]]
 (set: $dirtyGlove to false)
-&lt;!--dirtyGloves false--&gt;</tw-passagedata><tw-passagedata pid="39" name="정답" tags="" position="775,3275" size="100,100">이벤트 진행자: 정답입니다!
+&lt;!--dirtyGloves false--&gt;</tw-passagedata><tw-passagedata pid="42" name="정답" tags="" position="775,3275" size="100,100">이벤트 진행자: 정답입니다!
 고전게임을 정말 좋아하시거나 서울과학기술대학교 2024학년도 1학기 게임과 인문학 수요일 오전 수업을 열심히 들으셨나 보네요!
 상품으로 텀블러를 드리겠습니다!
 
 텀블러 없었는데 잘 됐다. 이번 기회에 들고다니면서 써보자.
-(set: $hasTumb to true)
+
+
 [[돌아간다|향학로]]
+(set: $hasTumb to true)
 &lt;!--iqValue += 20--&gt;
-&lt;!--hasTumb true--&gt;</tw-passagedata><tw-passagedata pid="40" name="조교님 말대로 헤파 필터를 교체한다." tags="" position="525,775" size="100,100">해파 필터를 교체했다.
+&lt;!--hasTumb true--&gt;
+(set: $hasTumb to true)
+(set: $iqValue to $iqValue+20)</tw-passagedata><tw-passagedata pid="43" name="조교님 말대로 헤파 필터를 교체한다." tags="" position="525,775" size="100,100">해파 필터를 교체했다.
 
 필터가 놓여진 곳 옆에 연필이 떨어져 있었다.
 실험에 활용 할 수 있겠는걸?
+
+
 [[돌아가기|실험실]]
 (set: $goodHepa to true)
 (set: $hasPencil to true)
 (set: $iqValue = $iqValue+10)
 &lt;!--goodHepa true--&gt;
 &lt;!--hasPencil true--&gt;
-&lt;!--iqValue +=10--&gt;</tw-passagedata><tw-passagedata pid="41" name="조금 더 가기" tags="" position="300,1275" size="100,100">거의...!
+&lt;!--iqValue +=10--&gt;</tw-passagedata><tw-passagedata pid="44" name="조금 더 가기" tags="" position="300,1275" size="100,100">거의...!
+
+
 [[폐액함]]
-[[돌아가기|싱크대]]</tw-passagedata><tw-passagedata pid="42" name="지금은 실험을 해야하니 일단 유산지에 덜어놓는다" tags="" position="1200,900" size="100,100">급하니 옆에 덜어두자.
+[[돌아가기|싱크대]]</tw-passagedata><tw-passagedata pid="45" name="지금은 실험을 해야하니 일단 유산지에 덜어놓는다" tags="" position="1200,900" size="100,100">급하니 옆에 덜어두자.
 
 [[돌아가기|책상]]
 &lt;!--goodChem false--&gt;
-(set: $goodChem to false)</tw-passagedata><tw-passagedata pid="43" name="진지 오답" tags="" position="775,3150" size="100,100">이벤트 진행자: 심오한 답변이군요... 아쉽지만 저희가 원한 답은 아니라서 땡.......!
-[[돌아간다|향학로]]</tw-passagedata><tw-passagedata pid="44" name="책상" tags="" position="1100,650" size="100,100">책상에서 실험을 진행한다. 
+(set: $goodChem to false)</tw-passagedata><tw-passagedata pid="46" name="진지 오답" tags="" position="775,3150" size="100,100">이벤트 진행자: 심오한 답변이군요... 아쉽지만 저희가 원한 답은 아니라서 땡.......!
+
+
+[[돌아간다|향학로]]</tw-passagedata><tw-passagedata pid="47" name="책상" tags="" position="1100,650" size="100,100">책상에서 실험을 진행한다. 
 조교님이 장갑에 약품이 너무 묻으면 실험 결과가 달라질 수 있다고 주의를 주셨었다.
+
+&lt;img src = &#39;https://ifh.cc/g/r12YQK.png&#39;&gt;
 
 (if:$dirtyGlove is true)
 [[새로운 장갑을 꺼낸다]]&lt;!--이 선택지는 dirtyGlove false면 출력되지 않음--&gt;(if:$dirtyGlove is false and $exprPercentage &lt;100)
 [[오늘의 실험 진행]]&lt;!--이 선택지는 dirtyGlove true or exprPercentage&gt;99면 출력되지 않음--&gt;(if: $gotChem is false)
 [[화학 약품]]&lt;!--이 선택지는 gotChem true면 출력되지 않음.--&gt;
-[[돌아가기|실험실]]</tw-passagedata><tw-passagedata pid="45" name="청소 아주머니에게 한 소리 들을 것 같다. 변기에 넣고 물을 내린다." tags="" position="1575,900" size="100,100">괜히 쓰레기를 늘리지 말자. 내가 만든 일은 처리해야지.
+[[돌아가기|실험실]]</tw-passagedata><tw-passagedata pid="48" name="청소 아주머니에게 한 소리 들을 것 같다. 변기에 넣고 물을 내린다." tags="" position="1575,900" size="100,100">괜히 쓰레기를 늘리지 말자. 내가 만든 일은 처리해야지.
+
 
 [[돌아간다|실험실]]
 (set: $goodToilet to false)
-&lt;!--goodToilet false--&gt;</tw-passagedata><tw-passagedata pid="46" name="총학생회에서 돗자리를 빌려온다" tags="" position="300,3000" size="100,100">학교에서 돗자리도 빌려주는구나.. 학생 복지 최고다!
+&lt;!--goodToilet false--&gt;</tw-passagedata><tw-passagedata pid="49" name="총학생회에서 돗자리를 빌려온다" tags="" position="300,3000" size="100,100">학교에서 돗자리도 빌려주는구나.. 학생 복지 최고다!
 근데 좀 지저분하긴하다... 닦아야겠는데?
-[[물티슈로 닦는다]]
-[[손수건으로 닦는다]] (if: $hasNapkin is true) &lt;!--해당 선택지는 hasNapkin true인 경우에만 등장.--&gt;</tw-passagedata><tw-passagedata pid="47" name="친구들 데려오기" tags="" position="750,2800" size="100,100">친구들이 붕어방으로 오기로 했는데 늦는다. 분명 세월아~ 네월아~ 천천히 오고 있겠지. 아무래도 내가 직접 데리러 가야겠어. 
+
+
+[[물티슈로 닦는다]](if: $hasNapkin is true)
+[[손수건으로 닦는다]] &lt;!--해당 선택지는 hasNapkin true인 경우에만 등장.--&gt;</tw-passagedata><tw-passagedata pid="50" name="친구들 데려오기" tags="" position="750,2800" size="100,100">친구들이 붕어방으로 오기로 했는데 늦는다. 분명 세월아~ 네월아~ 천천히 오고 있겠지. 아무래도 내가 직접 데리러 가야겠어. 
 
 후다다다다닥...! 퍽. 
 
@@ -302,22 +510,25 @@ ex) 책상과 새로운 장갑을 꺼낸다 사이에 새로운 설명 선택지
 ??: 아 괜찮아요 제가 지금 좀 바빠서 그냥 가지세요
 
 빠르게 갈 길 가버리네... 음 이 손수건은 어쩌지?
-(set: $isFriendsDone to true) &lt;!--isFriendsDone true--&gt;
+
+
 [[내 것도 아닌데, 찝찝하니 버린다|내것도 아니고.. 찝찝하니 버린다]]
-[[언젠간 쓸 일이 있겠지. 일단 챙겨둔다|어딘가 쓸 곳이 있겠지, 챙겨둔다.]]</tw-passagedata><tw-passagedata pid="48" name="카페" tags="" position="825,2100" size="100,100">카페 직원: 어서오세요~ 어떤걸로 주문하시겠어요?
+[[언젠간 쓸 일이 있겠지. 일단 챙겨둔다|어딘가 쓸 곳이 있겠지, 챙겨둔다.]]
+(set: $isFriendsDone to true) &lt;!--isFriendsDone true--&gt;</tw-passagedata><tw-passagedata pid="51" name="카페" tags="" position="825,2100" size="100,100">카페 직원: 어서오세요~ 어떤걸로 주문하시겠어요?
 음.... 뭘 먹을까?
 
-PLA 생분해 플라스틱 컵, 일회용 플라스틱 컵, 텀블러.
-소지품에 텀블러가 없는 경우엔 텀블러 선택지 선택 불가.
-컵 중 어느 것을 골라도 바로 악몽행은 아니고, 후에 분리수거를 할 때 잘해야 함. 생분해는 일쓰에, 일회용은 플라스틱에. 이걸 잘못하면 악몽행.
+&lt;img src =&#39;https://ifh.cc/g/cmSyGK.png&#39;&gt;
+
 [[아이스 아메리카노|카페 음료 선택]]
-[[자몽 에이드|카페 음료 선택]] (if: $hasTumb is true)
-[[딸기 라떼|카페 음료 선택]]
-&lt;!--해당 선택지는 hasTumb true인 경우에만 나타남.--&gt;</tw-passagedata><tw-passagedata pid="49" name="카페 음료 선택" tags="" position="825,2300" size="100,100">카페 직원: 네~ 우리 카페는 환경을 생각하는 매장으로 PLA 플라스틱컵을 도입했답니다. PLA 플라스틱 컵, 개인 텀블러, 일회용 플라스틱 컵 중에 선택해서 음료를 담아갈 수 있어요
+[[자몽 에이드|카페 음료 선택]]
+[[딸기 라떼|카페 음료 선택]]</tw-passagedata><tw-passagedata pid="52" name="카페 음료 선택" tags="" position="825,2300" size="100,100">카페 직원: 네~ 우리 카페는 환경을 생각하는 매장으로 PLA 플라스틱컵을 도입했답니다. PLA 플라스틱 컵, 개인 텀블러, 일회용 플라스틱 컵 중에 선택해서 음료를 담아갈 수 있어요
 ^^ 기존 플라스틱 컵은 분해되는데 500년 정도 걸리는 반면, PLA 플라스틱 컵은 1년 이내에 미생물에 의해 분해된대요.
-[[P 뭐시기? 그게 뭐야... 난 늘 쓰던 컵에 음료 받을래|환경을 지켜봐요 PLA 생분해플라스틱 컵]]
-[[좋은 취지니까 PLA 플라스틱 컵에 음료를 받아봐야겠다|일회용 플라스틱 컵]]
-[[텀블러가 있으니까 그냥 텀블러에 담을래|텀블러]]</tw-passagedata><tw-passagedata pid="50" name="코딩용 참고 페이지" tags="" position="700,200" size="100,100">필요 변수:
+
+
+[[좋은 취지니까 PLA 플라스틱 컵에 음료를 받아봐야겠다|환경을 지켜봐요 PLA 생분해플라스틱 컵]]
+[[P 뭐시기? 그게 뭐야... 난 늘 쓰던 컵에 음료 받을래|일회용 플라스틱 컵]] (if: $hasTumb is true)
+[[텀블러가 있으니까 그냥 텀블러에 담을래|텀블러]]
+&lt;!--해당 선택지는 hasTumb true인 경우에만 나타남.--&gt;</tw-passagedata><tw-passagedata pid="53" name="코딩용 참고 페이지" tags="" position="675,75" size="100,100">필요 변수:
 
 타입 이름 초기값
 
@@ -343,40 +554,52 @@ bool hasPencil false
 
 
 위의 변수들은 루프시 초기화 되지만,
-exprPercentage, iqValue, hasBeaker, hasClothes, hasPencil, hasTumb 값은 초기화하지 않는다. 후에 exprPercentage값이 100 이상이면 피크닉 씬에서 시작됨.</tw-passagedata><tw-passagedata pid="51" name="큰 폐액함에 버리고 온다" tags="" position="300,900" size="100,100">번거롭지만 제대로 버려야지.
+exprPercentage, iqValue, hasBeaker, hasClothes, hasPencil, hasTumb 값은 초기화하지 않는다. 후에 exprPercentage값이 100 이상이면 피크닉 씬에서 시작됨.</tw-passagedata><tw-passagedata pid="54" name="큰 폐액함에 버리고 온다" tags="" position="300,900" size="100,100">번거롭지만 제대로 버려야지.
+
 
 [[폐액함으로]]
-[[돌아가기|싱크대]]</tw-passagedata><tw-passagedata pid="52" name="텀블러" tags="" position="950,2525" size="100,100">카페 직원: 감사합니다 좋은하루 되세요~
+[[돌아가기|싱크대]]</tw-passagedata><tw-passagedata pid="55" name="텀블러" tags="" position="950,2525" size="100,100">카페 직원: 감사합니다 좋은하루 되세요~
 (set: $isCupTumb to true) &lt;!--isCupTumb true--&gt;
-[[붕어방으로 간다|붕어방]]</tw-passagedata><tw-passagedata pid="53" name="텀블러 변수용 passage" tags="" position="1225,2650" size="100,100">텀블러 사용하면 이런 장점도 있는 걸 처음 알았네. 앞으로 자주 이용해야겠어!
+
+[[붕어방으로 간다|붕어방]]</tw-passagedata><tw-passagedata pid="56" name="텀블러 변수용 passage" tags="" position="1225,2650" size="100,100">텀블러 사용하면 이런 장점도 있는 걸 처음 알았네. 앞으로 자주 이용해야겠어!
 (set: $isDrinkDone to true) &lt;!--isDrinkDone true--&gt;
-[[돌아가기|붕어방]]</tw-passagedata><tw-passagedata pid="54" name="폐기물 함에 버리러 다녀온다" tags="" position="1325,900" size="100,100">약품은 제대로 버려야지.
+[[돌아가기|붕어방]]
+(set: $goodCup to true)</tw-passagedata><tw-passagedata pid="57" name="폐기물 함에 버리러 다녀온다" tags="" position="1325,900" size="100,100">약품은 제대로 버려야지.
 
 [[돌아가기|책상]]
 (set: $hasChem to true)
-&lt;!--hasChem true--&gt;</tw-passagedata><tw-passagedata pid="55" name="폐액통" tags="" position="300,775" size="100,100">작은 폐액통이 있다. 여기에서 플라스크에 있는 폐액을 버릴 수 있다.
+&lt;!--hasChem true--&gt;</tw-passagedata><tw-passagedata pid="58" name="폐액통" tags="" position="300,775" size="100,100">작은 폐액통이 있다. 여기에서 플라스크에 있는 폐액을 버릴 수 있다.
 
 그런데 폐액통의 거의 찬 것 같다.
 
+
 [[큰 폐액함에 버리고 온다]]
 [[이 정도 양이면 그냥 이 폐액통에 버릴 수 있을 것 같다]]
-[[돌아가기|싱크대]]</tw-passagedata><tw-passagedata pid="56" name="폐액함" tags="" position="300,1400" size="100,100">폐액함에 제대로 모두 비웠다.
+[[돌아가기|싱크대]]</tw-passagedata><tw-passagedata pid="59" name="폐액함" tags="" position="300,1400" size="100,100">폐액함에 제대로 모두 비웠다.
+
 
 [[돌아가기|싱크대]]
 &lt;!--goodChem true--&gt;
 &lt;!--hasChem false--&gt;
 (set: $goodChem to true)
-(set: $hasChem to false)</tw-passagedata><tw-passagedata pid="57" name="폐액함으로" tags="" position="300,1025" size="100,100">폐액함으로 가는 중이다.
+(set: $hasChem to false)</tw-passagedata><tw-passagedata pid="60" name="폐액함으로" tags="" position="300,1025" size="100,100">폐액함으로 가는 중이다.
+
+
 [[계속]]
-[[돌아가기|싱크대]]</tw-passagedata><tw-passagedata pid="58" name="피크닉 길몽" tags="" position="1675,2925" size="100,100">(냠냠)
+[[돌아가기|싱크대]]</tw-passagedata><tw-passagedata pid="61" name="피크닉 길몽" tags="" position="1675,2925" size="100,100">(냠냠)
 
 아.. 배부르니까 잠이 솔솔 오네. 눈 잠깐만 붙이고 일어나야지..~
 
 zZ.....
-[[엔딩으로]]</tw-passagedata><tw-passagedata pid="59" name="피크닉 씬" tags="" position="800,1700" size="100,100">나: 와 실험실 정리만 1시간 넘게 걸렸네... 진짜 배고픈데 뭐 먹지?
+
+
+[[산뜻한 바람이 느껴진다.|길몽]]</tw-passagedata><tw-passagedata pid="62" name="피크닉 씬" tags="" position="800,1700" size="100,100">나: 와 실험실 정리만 1시간 넘게 걸렸네... 진짜 배고픈데 뭐 먹지?
 친구: 날씨 좋은 붕어방에서는 짜장면이 짱이지. 붕짜 어때?
-나: 중식 좋다. 짜장면 배민으로 시키고 1학생관에 있는 카페 들렸다 붕어방으로 가자. 친구: 오케이. 여기 중에서 뭐 먹을래? 
-[[배달앱을 들여다본다|배달앱]]</tw-passagedata><tw-passagedata pid="60" name="피크닉 씬 코딩용 참고 페이지" tags="" position="1850,1725" size="100,100">필요 변수:
+나: 중식 좋다. 짜장면 배민으로 시키고 1학생관에 있는 카페 들렸다 붕어방으로 가자.
+친구: 오케이. 여기 중에서 뭐 먹을래? 
+
+
+[[배달앱을 들여다본다|배달앱]]</tw-passagedata><tw-passagedata pid="63" name="피크닉 씬 코딩용 참고 페이지" tags="" position="1850,1725" size="100,100">필요 변수:
 
 타입 이름 초기값
 
@@ -401,7 +624,7 @@ bool isEventDone false
 
 
 위의 변수들은 루프시 초기화 되지만,
-exprPercentage, iqValue, hasBeaker, hasClothes, hasPencil, hasTumb 값은 초기화하지 않는다. 후에 exprPercentage값이 100 이상이면 피크닉 씬에서 시작됨.</tw-passagedata><tw-passagedata pid="61" name="피크닉 악몽" tags="" position="1500,2925" size="100,100">(냠냠)
+exprPercentage, iqValue, hasBeaker, hasClothes, hasPencil, hasTumb 값은 초기화하지 않는다. 후에 exprPercentage값이 100 이상이면 피크닉 씬에서 시작됨.</tw-passagedata><tw-passagedata pid="64" name="피크닉 악몽" tags="" position="1500,2925" size="100,100">(냠냠)
 
 아.. 배부르니까 잠이 솔솔 오네. 눈 잠깐만 붙이고 일어나야지..~
 
@@ -414,16 +637,39 @@ zZ.....
 (ㅍ드덕... 푸...ㄷ,...)
 
 뭐가 나는 소리... 인가....... 으아아아악!! 까마귀가 왜이렇게 커....!!! 살려줘 ............!!!!!!!!!!
-
-[[실험실로 가는 경우]]
-&lt;!--해당 선택지는 exprPercentage값이 100 미만인 경우. --&gt;
-[[피크닉으로 가는 경우]]
-&lt;!--해당 선택지는 exprPercentage값이 100 이상인 경우. --&gt;</tw-passagedata><tw-passagedata pid="62" name="피크닉가기" tags="" position="800,1100" size="100,100">(if: $gotChem is true)
+(if: $exprPercentage &lt;100)
+[[악몽이 짙어진다.|실험실으로]]&lt;!--해당 선택지는 exprPercentage값이 100 미만인 경우. --&gt;
+(if: $exprPercentage &gt;99)
+[[악몽이 짙어진다.|피크닉으로]]&lt;!--해당 선택지는 exprPercentage값이 100 이상인 경우. --&gt;</tw-passagedata><tw-passagedata pid="65" name="피크닉가기" tags="" position="800,1100" size="100,100">(if: $gotChem is true)
 [[다했으니 나가야지~|피크닉 씬]]
-[[아직 할일이 남았나?|실험실]]</tw-passagedata><tw-passagedata pid="63" name="피크닉씬 스토리용 참고 페이지" tags="" position="2025,1725" size="100,100">기본적으로 모든 텍스트는 교체 가능합니다. 자연스럽다고 생각하시는 방식으로 수정해주세요.
+
+
+[[아직 할일이 남았나?|실험실]]</tw-passagedata><tw-passagedata pid="66" name="피크닉씬 스토리용 참고 페이지" tags="" position="2025,1725" size="100,100">기본적으로 모든 텍스트는 교체 가능합니다. 자연스럽다고 생각하시는 방식으로 수정해주세요.
 passage안에 스토리 관련하여 요청 사항이 있는 경우엔 해당 요구를 유의하여 스토리 제작을 요청 드리는 바입니다.
 요청 사항이 있는 passage들의 텍스트만 수정하는 것이 아니라 모든 텍스트들이 자연스러워지도록 제작 부탁드립니다!
-+위의 실험실 씬을 플레이 해보시고, 해당 파트의 텍스트적 분위기가 이어지도록 주인공 및 설명 텍스트의 분위기 조성을 부탁드립니다!</tw-passagedata><tw-passagedata pid="64" name="피크닉으로 가는 경우" tags="" position="1400,1700" size="100,100">....
++위의 실험실 씬을 플레이 해보시고, 해당 파트의 텍스트적 분위기가 이어지도록 주인공 및 설명 텍스트의 분위기 조성을 부탁드립니다!</tw-passagedata><tw-passagedata pid="67" name="피크닉으로" tags="" position="1350,2075" size="100,100">&lt;iframe id=&quot;bitsyone&quot; src=&quot;https://woduf1020.github.io/Dream
+_3&quot; style=&quot;border:none&quot; 
+height=512px width=512px&gt;&lt;/iframe&gt;
+&lt;style&gt;
+        .hidden-link {
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            animation: showLink 11s forwards;
+        }
+
+        @keyframes showLink {
+            0% {
+                opacity: 0;
+            }
+            83.33% { /* 5초 동안 숨김 상태 유지 */
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+&lt;/style&gt;
+&lt;a class=&quot;hidden-link&quot;&gt;[[잠에서 깨어난다.|피크닉으로 가는 경우]]&lt;/a&gt;</tw-passagedata><tw-passagedata pid="68" name="피크닉으로 가는 경우" tags="" position="1400,1700" size="100,100">....
 
 ..........
 
@@ -437,29 +683,57 @@ passage안에 스토리 관련하여 요청 사항이 있는 경우엔 해당 �
 밥 먹으러 가는 길이였지 참?
 
 나: 중식 좋다. 짜장면 배민으로 시키고 1학생관에 있는 카페 들렸다 붕어방으로 가자.
-[[피크닉 씬]]
-&lt;!--여기선 경고사항을 제외한 나머지 변수들을 초기화 해주세요.--&gt;</tw-passagedata><tw-passagedata pid="65" name="향학로" tags="" position="1125,3075" size="100,100">(웅성웅성1) 지나가는 학생! 잠깐 이벤트 참여하고 가요. 상품도 빵빵해요~
+
+
+[[배달앱]]
+&lt;!--여기선 경고사항을 제외한 나머지 변수들을 초기화 해주세요.--&gt;
+(set: $goodFood to false)
+(set: $goodCup to false)
+(set: $goodTable to true)
+&lt;!-- 악몽 여부를 담당하는 변수들.--&gt;
+(set: $isCupPla to false)
+(set: $isCupPlastic to false)
+(set: $isCupTumb to false)
+&lt;!--어떤 컵을 사용했는지 담당하는 변수들.--&gt;
+(set: $isFriendsDone to false)
+(set: $isDrinkDone to false)
+(set: $isTableDone to false)
+&lt;!-- 음식을 먹기 전 해결해야하는 일들. 해결하면 true로 전환.--&gt;
+(set: $hasNapkin to false)
+&lt;!-- 진행하며 수집할 수 있게 되는 아이템의 변수들. 포스터는 한번 보면 그대로 유지. 주우면 true로 전환. --&gt;
+(set: $isEventDone to false)
+&lt;!-- 이벤트 중복참여 방지 변수--&gt;
+(set: $goodToilet to true)
+(set: $goodChem to true)
+(set: $goodHepa to true)
+(set: $goodGlove to true)
+&lt;!-- 실험 완료시 앞선 악몽 변수들 무관해짐--&gt;</tw-passagedata><tw-passagedata pid="69" name="향학로" tags="" position="1100,3050" size="100,100">(웅성웅성1) 지나가는 학생! 잠깐 이벤트 참여하고 가요. 상품도 빵빵해요~
 (웅성웅성2) 아까 총학생회가 게시판 업데이트 하고 가더라.
 (웅성웅성3) 아 수업 가기 싫다.... 
 
-향학로는 이벤트 참여를 유도하는 사람과 게시판이 업데이트 되어서 시끌벅적 했던 것이다. 나는 무엇을 선택할까.
+뭔가 여럿 있는 것 같네.. 어떻게 할까?
+
 (if: $hasPoster is false)  &lt;!--해당 선택지는 hasPoster false시에만 등장.--&gt;
-[[게시판 확인해야지|게시판]] (if: $isEventDone is false) &lt;!--해당 선택지는 isEventDone false시에만 등장.--&gt;
-[[상품은 나의 것. 이벤트 참여해야겠다|이벤트]]
-[[그냥 돌아가자|분리수거장으로]]</tw-passagedata><tw-passagedata pid="66" name="화장실" tags="" position="1450,650" size="100,100">화장실에 도착하니 갑자기 어제 뭘 잘 못 먹었는지 배가 아프다. 얼른 볼 일을 봐야겠다.
+[[게시판 확인해야지|게시판]] (if: $isEventDone is false and $hasTumb is false)
+[[상품은 나의 것. 이벤트 참여해야겠다|이벤트]]&lt;!--해당 선택지는 isEventDone false시에만 등장.--&gt;
+[[그냥 돌아가자|분리수거장으로]]</tw-passagedata><tw-passagedata pid="70" name="화장실" tags="" position="1450,650" size="100,100">화장실에 도착하니 갑자기 어제 뭘 잘 못 먹었는지 배가 아프다. 얼른 볼 일을 봐야겠다.
 
 이런! 내부 칸의 휴지 걸이는 비어있고, 밖에 있는 휴지 걸이에 휴지가 있다. 모자랄 수도 있으니 넉넉히 휴지를 챙긴다.
 
-[[볼일 보기]]</tw-passagedata><tw-passagedata pid="67" name="화학 약품" tags="" position="1225,775" size="100,100">약품을 시약장에 넣어둬야겠다.
+
+[[볼일 보기]]</tw-passagedata><tw-passagedata pid="71" name="화학 약품" tags="" position="1225,775" size="100,100">약품을 시약장에 넣어둬야겠다.
 
 실수로 너무 많이 담아버렸다. 남은 시약을 어떻게 처리하지?
+
 
 [[지금은 실험을 해야하니 일단 유산지에 덜어놓는다]]
 [[폐기물 함에 버리러 다녀온다]]
 (set: $gotChem to True)
-&lt;!--gotChem True--&gt;</tw-passagedata><tw-passagedata pid="68" name="환경을 지켜봐요 PLA 생분해플라스틱 컵" tags="" position="700,2525" size="100,100">카페 직원: 감사합니다 좋은하루 되세요~
+&lt;!--gotChem True--&gt;</tw-passagedata><tw-passagedata pid="72" name="환경을 지켜봐요 PLA 생분해플라스틱 컵" tags="" position="700,2525" size="100,100">카페 직원: 감사합니다 좋은하루 되세요~
 (set: $isCupPla to true) &lt;!--isCupPla true--&gt;
-[[붕어방으로 간다|붕어방]]</tw-passagedata><tw-passagedata pid="69" name="후드" tags="" position="525,650" size="100,100">후드의 LCD창을 보니 헤파필터 소모율이 98%이다.
+
+[[붕어방으로 간다|붕어방]]</tw-passagedata><tw-passagedata pid="73" name="후드" tags="" position="525,650" size="100,100">후드의 LCD창을 보니 헤파필터 소모율이 98%이다.
+
 
 [[조교님 말대로 헤파 필터를 교체한다.]]
 [[이 정도면 다음 주에 교체해도 괜찮을 것 같다. 필터도 아껴 써야지.|실험실]]</tw-passagedata></tw-storydata>
